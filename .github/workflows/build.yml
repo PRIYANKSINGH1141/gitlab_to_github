@@ -1,0 +1,31 @@
+name: Build Job
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    container:
+      image: ubuntu:22.04
+
+    timeout-minutes: 60
+
+    env:
+      APP_NAME: demo-app
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: echo "Building $APP_NAME..."
+
+      - run: echo "Docker Image Build Successful" > build.txt
+
+      - run: cat build.txt
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: build.txt
+          retention-days: 1
