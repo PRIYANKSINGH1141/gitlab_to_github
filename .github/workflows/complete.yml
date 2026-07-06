@@ -8,8 +8,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: ubuntu:22.04
     timeout-minutes: 60
     env:
       APP_NAME: demo-app
@@ -30,8 +28,6 @@ jobs:
   test:
     needs: build
     runs-on: ubuntu-latest
-    container:
-      image: ubuntu:22.04
     timeout-minutes: 60
     env:
       APP_NAME: demo-app
@@ -58,8 +54,6 @@ jobs:
   deploy:
     needs: test
     runs-on: ubuntu-latest
-    container:
-      image: ubuntu:22.04
     timeout-minutes: 60
     env:
       APP_NAME: demo-app
