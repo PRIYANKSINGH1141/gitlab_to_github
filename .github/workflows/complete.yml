@@ -38,7 +38,7 @@ jobs:
         lfs: true
     - uses: actions/download-artifact@v4.1.0
       with:
-        name: build_job
+        name: build
         path: .
     - run: echo "Reading artifact from build stage..."
     - run: cat build.txt
@@ -64,7 +64,7 @@ jobs:
         lfs: true
     - uses: actions/download-artifact@v4.1.0
       with:
-        name: test_job
+        name: test
         path: .
     - run: echo "Deploying Application..."
     - run: cat test.txt
