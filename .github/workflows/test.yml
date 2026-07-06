@@ -1,0 +1,40 @@
+name: Test Job
+
+on:
+  workflow_call:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    container:
+      image: ubuntu:22.04
+
+    timeout-minutes: 60
+
+    env:
+      APP_NAME: demo-app
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: build
+          path: .
+
+      - run: echo "Reading artifact from build stage..."
+
+      - run: cat build.txt
+
+      - run: echo "Running Tests..."
+
+      - run: echo "Tests Passed" > test.txt
+
+      - run: cat test.txt
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: test
+          path: test.txt
+          retention-days: 1
